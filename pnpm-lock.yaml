@@ -1,15 +1,19 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@types/leaflet': ^1.9.3
   '@types/react': ^18.0.28
   '@types/react-dom': ^18.0.11
   '@vitejs/plugin-react': ^3.1.0
+  leaflet: ^1.9.3
   react: ^18.2.0
   react-dom: ^18.2.0
   typescript: ^4.9.3
   vite: ^4.2.0
 
 dependencies:
+  '@types/leaflet': 1.9.3
+  leaflet: 1.9.3
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
 
@@ -486,6 +490,16 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
 
+  /@types/geojson/7946.0.10:
+    resolution: {integrity: sha512-Nmh0K3iWQJzniTuPRcJn5hxXkfB1T1pgB89SBig5PlJQU5yocazeu4jATJlaA0GYFKWMqDdvYemoSnF2pXgLVA==}
+    dev: false
+
+  /@types/leaflet/1.9.3:
+    resolution: {integrity: sha512-Caa1lYOgKVqDkDZVWkto2Z5JtVo09spEaUt2S69LiugbBpoqQu92HYFMGUbYezZbnBkyOxMNPXHSgRrRY5UyIA==}
+    dependencies:
+      '@types/geojson': 7946.0.10
+    dev: false
+
   /@types/prop-types/15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
     dev: true
@@ -683,6 +697,10 @@ packages:
     engines: {node: '>=6'}
     hasBin: true
     dev: true
+
+  /leaflet/1.9.3:
+    resolution: {integrity: sha512-iB2cR9vAkDOu5l3HAay2obcUHZ7xwUBBjph8+PGtmW/2lYhbLizWtG7nTeYht36WfOslixQF9D/uSIzhZgGMfQ==}
+    dev: false
 
   /loose-envify/1.4.0:
     resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
