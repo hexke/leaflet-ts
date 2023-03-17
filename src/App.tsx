@@ -3,7 +3,12 @@ import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import Container from './components/container/container';
 import { FC, useCallback, useState } from 'react';
-import L, { LatLngExpression, Map } from 'leaflet';
+import L, { LatLngExpression, LeafletEventHandlerFn, LeafletEventHandlerFnMap, Map, marker } from 'leaflet';
+import styled from 'styled-components';
+
+const StyledMap = styled(MapContainer)`
+height: 500px;
+`;
 
 function LocateButton({ map }: { map: L.Map | null }) {
 
@@ -23,9 +28,32 @@ function LocateButton({ map }: { map: L.Map | null }) {
     );
 }
 
+interface MapEventsProps {
+    addMarker: (newMarker: Coords) => void;
+}
+
+function MapEvents({ addMarker }: MapEventsProps) {
+    const map = useMapEvents({
+        click(e) {
+            addMarker(e.latlng);
+            console.log(e.latlng);
+        }
+    });
+    return null;
+}
+
+interface Coords {
+    lat: number;
+    lng: number;
+}
 
 function App() {
     const [map, setMap] = useState<L.Map | null>(null);
+    const [markers, setMarkers] = useState<Coords[]>([]);
+
+    const addMarker = useCallback((newMarker: Coords) => {
+        setMarkers(prev => [...prev, newMarker]);
+    }, []);
 
     return (
         <div className="App">
@@ -33,12 +61,22 @@ function App() {
                 <p>Leaflet map</p>
             </Container>
             <Container>
-                <MapContainer ref={setMap} center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false} style={{ "height": "500px", "width": "1000px" }}>
+                <StyledMap ref={setMap} center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                </MapContainer>
+                    {markers.map(marker =>
+                        <Marker position={marker}>
+                            <Popup>
+                                position of this marker is:<br />
+                                {'lat:' + marker.lat.toFixed(2)}
+                                {'lng:' + marker.lng.toFixed(2)}
+                            </Popup>
+                        </Marker>
+                    )}
+                    <MapEvents addMarker={addMarker} />
+                </StyledMap >
                 <LocateButton map={map} />
             </Container>
         </div>
